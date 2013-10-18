@@ -1,0 +1,152 @@
+//doubly linked list code
+
+#include <iostream>
+
+using namespace std;
+
+struct node
+{
+    int x;
+    node *nextptr;
+    node *prevptr;
+};
+
+int top = 0;
+int temp = -1;
+int integer;
+node *root;
+node *tail;
+node *pointer;
+void insertnode(int);
+void traversefromroot(node *);
+void traversefromtail(node *);
+void deletenode(node *,node *, node *);
+
+void insertnode(int element)
+{
+    pointer = new node;
+    pointer->x = element;
+
+    if(top==0)
+    {
+        root = pointer;
+        tail = pointer;
+        tail->nextptr = 0;
+        root->prevptr = 0;
+    }
+    else
+    {
+        tail->nextptr = pointer;
+        pointer->prevptr = tail;
+        tail = pointer;
+        tail->nextptr = 0;
+    }
+    top++;
+}
+
+void traversefromroot(node *root)
+{
+    node *currentptr = root;
+
+    while(currentptr!=NULL)
+    {
+        cout<<currentptr->x<<endl;
+        currentptr = currentptr->nextptr;
+    }
+}
+
+void traversefromtail(node *tail)
+{
+    node *traverseptr = tail;
+
+    while(traverseptr!=NULL)
+    {
+        cout<<traverseptr->x<<endl;
+        traverseptr = traverseptr->prevptr;
+    }
+}
+
+void deletenode(node* object,node *root,node *tail)
+{
+    if(object==root)
+    {
+        root = root->nextptr;
+        object->nextptr = 0;
+        root->prevptr = 0;
+        delete object;
+    }
+    else if(object ==tail)
+    {
+        tail = tail->prevptr;
+        tail->nextptr = 0;
+        object->prevptr = 0;
+        delete object;
+    }
+    else
+    {
+        node* currentptr1 = root;
+        node *traverseptr1 = tail;
+
+        while(currentptr1->nextptr != object)
+        {
+            currentptr1 = currentptr1->nextptr;
+        }
+
+        while(traverseptr1->prevptr != object)
+        {
+            traverseptr1 = traverseptr1->prevptr;
+        }
+
+        currentptr1->nextptr = traverseptr1;
+        traverseptr1->prevptr = currentptr1;
+        object->nextptr = 0;
+        object->prevptr = 0;
+        delete object;
+    }
+}
+
+int main()
+{
+     while(temp!=0)
+	{
+        cout<<"Enter 1 to enter an element onto the list"<<endl;
+		cout<<"Enter 2 to traverse the list from the root"<<endl;
+		cout<<"Enter 3 to traverse the list from the tail"<<endl;
+		cout<<"Enter 4 to delete a node"<<endl;
+		cout<<"Enter 0 to exit"<<endl;
+		cin>>temp;
+
+    switch(temp)
+	{
+        case 1:
+		{
+            //push implementation, tests for when the stack is full.
+            cout<<"Please enter the value that needs to be added to the list"<<endl;
+			cin>>integer;
+            insertnode(integer);
+			break;
+        }
+        case 2:
+        {
+            cout<<"The elements starting from the root are"<<endl;
+            traversefromroot(root);
+            break;
+        }
+        case 3:
+        {
+            cout<<"The elements starting from the tail are"<<endl;
+            traversefromtail(tail);
+            break;
+        }
+        case 4:
+        {
+            cout<<"As an example, lets remove the third node"<<endl;
+            //if the output of traversefromroot was 1 2 3 4 5 6 7 8, after this step, it should be 1 2 4 5 6 7 8.
+            deletenode(root->nextptr->nextptr,root,tail);
+            break;
+        }
+	}
+	}
+	return 0;
+}
+
