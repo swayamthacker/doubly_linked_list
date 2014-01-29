@@ -108,45 +108,44 @@ void deletenode(node* object,node *root,node *tail)
 int main()
 {
      while(temp!=0)
-	{
+     {
         cout<<"Enter 1 to enter an element onto the list"<<endl;
-		cout<<"Enter 2 to traverse the list from the root"<<endl;
-		cout<<"Enter 3 to traverse the list from the tail"<<endl;
-		cout<<"Enter 4 to delete a node"<<endl;
-		cout<<"Enter 0 to exit"<<endl;
-		cin>>temp;
+	cout<<"Enter 2 to traverse the list from the root"<<endl;
+	cout<<"Enter 3 to traverse the list from the tail"<<endl;
+	cout<<"Enter 4 to delete a node"<<endl;
+	cout<<"Enter 0 to exit"<<endl;
+	cin>>temp;
 
-    switch(temp)
+        switch(temp)
 	{
-        case 1:
-		{
-            //push implementation, tests for when the stack is full.
-            cout<<"Please enter the value that needs to be added to the list"<<endl;
-			cin>>integer;
-            insertnode(integer);
-			break;
-        }
-        case 2:
-        {
-            cout<<"The elements starting from the root are"<<endl;
-            traversefromroot(root);
-            break;
-        }
-        case 3:
-        {
-            cout<<"The elements starting from the tail are"<<endl;
-            traversefromtail(tail);
-            break;
-        }
-        case 4:
-        {
-            cout<<"As an example, lets remove the third node"<<endl;
-            //if the output of traversefromroot was 1 2 3 4 5 6 7 8, after this step, it should be 1 2 4 5 6 7 8.
-            deletenode(root->nextptr->nextptr,root,tail);
-            break;
-        }
+	case 1:
+	{
+		cout<<"Please enter the value that needs to be added to the list"<<endl;
+		cin>>integer;
+		insertnode(integer);
+		break;
+	}
+	case 2:
+	{
+		cout<<"The elements starting from the root are"<<endl;
+		traversefromroot(root);
+		break;
+	}
+	case 3:
+	{
+		cout<<"The elements starting from the tail are"<<endl;
+		traversefromtail(tail);
+		break;
+	}
+	case 4:
+	{
+		cout<<"As an example, lets remove the third node"<<endl;
+		//if the output of traversefromroot was 1 2 3 4 5 6 7 8, after this step, it should be 1 2 4 5 6 7 8.
+		deletenode(root->nextptr->nextptr,root,tail);
+		break;
 	}
 	}
+     }
 	return 0;
 }
 
